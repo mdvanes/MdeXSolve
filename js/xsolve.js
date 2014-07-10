@@ -36,6 +36,7 @@
     };
 
     Matrix.prototype.highlightChar = function(char) {
+        this.eachCell(lowlight);
         if(typeof char === 'undefined') {
             char = ' ';
         }
@@ -44,18 +45,24 @@
             $.each(this, function() {
                 if(this.char === char) {
                     this.highlight();
-                } else {
-                    this.lowlight();
                 }
+            });
+        });
+    };
+
+    Matrix.prototype.eachCell = function(func) {
+        $.each(this.rows, function() {
+            $.each(this, function() {
+                func(this);
             });
         });
     };
 
     function Cell($elem) {
         this.$elem = $elem;
-        var char = this.$elem.text()[0];
-        char = String.toLowerCase(char);
-        this.char = char;
+        var firstChar = this.$elem.text()[0];
+        firstChar = String.toLowerCase(firstChar);
+        this.char = firstChar;
     };
 
     Cell.prototype.highlight = function() {
@@ -63,8 +70,8 @@
         this.$elem.addClass('highlight');
     };
 
-    Cell.prototype.lowlight = function() {
-        this.$elem.removeClass('highlight');
+    function lowlight(cell) {
+        cell.$elem.removeClass('highlight');
     };
 
     // Functions
