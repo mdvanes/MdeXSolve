@@ -2,7 +2,6 @@ var xsolve;
 (function($, xsolve) {
     'use strict';
 
-    // Class Matrix
     var Matrix = function($table) {
         this.rows = [];
 
@@ -11,9 +10,6 @@ var xsolve;
         $('tr', $table).each(function() {
             var row = [];
             $('td', this).each(function() {
-                // var ch = $(this).text()[0];
-                // ch = String.toLowerCase(ch);
-                //console.log(ch)
                 var cell = new xsolve.Cell($(this));
                 row.push(cell);
             });
