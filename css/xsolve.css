@@ -1,0 +1,18 @@
+#crossword {
+    text-align: center;
+}
+
+#crossword .highlight {
+    background-color: #0fa;
+}
+
+#crossword table {
+    font-size: 200%;
+    margin: 0 auto 1em auto;
+}
+
+#crossword table td {
+    border: 1px solid #ccc;
+    height: 1.5em;
+    width: 1.5em;
+}
