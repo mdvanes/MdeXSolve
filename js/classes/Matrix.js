@@ -42,11 +42,12 @@ var xsolve;
         input = String.toLowerCase(input);
         var char = input[0];
         var tail = input.substr(1);
+        var rows = this.rows;
 
         this.eachCell(function(cell) {
             if(cell.char === char) {
                 cell.highlight();
-                cell.neighbors(tail);
+                cell.path(tail, 'any', rows);
             }
         });
     };
@@ -63,6 +64,44 @@ var xsolve;
         // this.eachCell(function(cell) {
         //
         // });
+        var rows = this.rows;
+        $.each(this.rows, function(i) {
+            $.each(this, function(j) {
+                //console.log('pos ' + i + ' ' + j );
+                //func(this);
+                // x and y are i and j of neighbor
+                var x, y;
+                // map of neighbors, direction: coords
+                var neighbors = {};
+                // n
+                x = i - 1;
+                y = j;
+                if( x > -1 ) {
+                    neighbors['n'] = [x, y];
+                }
+                // w
+                x = i;
+                y = j - 1;
+                if( y > -1 ) {
+                    neighbors['w'] = [x, y];
+                }
+                // e
+                x = i;
+                y = j + 1;
+                if( y < rows[i].length ) {
+                    neighbors['e'] = [x, y];
+                }
+                // s
+                x = i + 1;
+                y = j;
+                if( x < rows.length ) {
+                    neighbors['s'] = [x, y];
+                }
+                //console.log('neighbors of ' + i + ',' + j );
+                //console.log(neighbors);
+                this.neighbor = neighbors;
+            });
+        });
     };
 
     xsolve.Matrix = Matrix;
